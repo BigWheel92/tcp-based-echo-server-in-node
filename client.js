@@ -25,7 +25,6 @@ rl.setPrompt('Enter the data to be sent to server (Enter e for exit): ');
 
 rl.on('line', (input)=>{
     if (input.length==1 && input.toLowerCase()==='e'){
-       
         process.exit();
     }
     else
