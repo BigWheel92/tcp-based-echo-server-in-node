@@ -1,13 +1,17 @@
 const net=require('net');
+const ip = require('ip');
 const readline = require("readline");
 
 const server=net.createServer();
-const port=4000;
-const ip='localhost'
+const ip_addr=ip.address();
+const port=Number.parseInt(process.argv[2]);
 
+server.on('error', (err)=>{
+    console.log(err);
+});
 
-server.listen(port, ip, ()=>{
-    console.log(`server has started listening on port: ${port} and ip: ${ip}`)
+server.listen(port, ip_addr, ()=>{
+    console.log(`server has started listening on port: ${port} and ip: ${ip_addr}`)
 } );
 
 server.on('connection', (client_socket)=>{
@@ -32,14 +36,19 @@ server.on('connection', (client_socket)=>{
         else
         console.log(`client (ip: ${client_socket.remoteAddress}, port: ${client_socket.remotePort}) disconnected normally.\n`);
 
-   
-    
     });
+
+    client_socket.on('error', (err)=>{
+      
+        console.log(`An error occurred at client (ip: ${client_socket.remoteAddress}, port: ${client_socket.remotePort}).\n`);
+
+
+    });
+
+
 })
 
-server.on('error', (err)=>{
-    console.log(err);
-});
+
 
 
 var rl = readline.createInterface({

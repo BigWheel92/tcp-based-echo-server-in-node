@@ -1,8 +1,8 @@
 const net=require('net');
 const readline = require("readline");
 
-const port=4000;
-const ip='localhost'
+const ip=process.argv[2];
+const port=Number.parseInt(process.argv[3]);
 const server=net.connect(port, ip, ()=>{
     console.log('Connection established with echo server!\n');
 })
@@ -25,8 +25,13 @@ rl.setPrompt('Enter the data to be sent to server (Enter e for exit): ');
 
 rl.on('line', (input)=>{
     if (input.length==1 && input.toLowerCase()==='e'){
+       
         process.exit();
     }
     else
     server.write(input);
+})
+
+process.on('exit', ()=>{
+    server.destroy();
 })
