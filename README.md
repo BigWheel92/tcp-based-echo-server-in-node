@@ -1,15 +1,13 @@
 # tcp-based-echo-server-in-node.js
 
-# How to Run:
-
-# Run the server:
+# How to Run the Server:
 Run the following command on the terminal:
 node server {port}
 
 Example:
 node server 4000
 
-# Run the client:
+# How to Run the Client:
 Run the following command on the terminal:
 node client {ip} {port}
 
